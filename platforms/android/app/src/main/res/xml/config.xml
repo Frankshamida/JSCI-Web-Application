@@ -1,0 +1,16 @@
+<?xml version='1.0' encoding='utf-8'?>
+<widget android-versionCode="1" id="com.JSCI.JSCIApp" version="1.0.0" xmlns="http://www.w3.org/ns/widgets">
+    <name>JSCIApp</name>
+    <description>
+        JSCIApp application
+    </description>
+    <author>
+        JSCI Team                                           
+    </author>
+    <content src="Login.html" />
+    <access origin="*" />
+    <allow-intent href="http://*/*" />
+    <allow-intent href="https://*/*" />
+    <preference name="loglevel" value="DEBUG" />
+    <preference name="Orientation" value="portrait" />
+</widget>

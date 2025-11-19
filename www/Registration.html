@@ -1,0 +1,936 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Church Anniversary Registration</title>
+    <link rel="icon" type="image/x-icon" href="assets/LOGO.png">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <style>
+        :root {
+            --primary: #926C15; /* SATIN SHEEN - GOLDEN BROWN */
+            --secondary: #C9980B; /* MIKADO - GOLD */
+            --accent: #FFC300; /* NAPLES - YELLOW */
+            --light-yellow: #FFD235; /* YELLOW */
+            --bright-yellow: #FFE169; /* SUNGLOW */
+            --light: #f8f9fa;
+            --dark: #343a40;
+            --success: #28a745;
+            --danger: #dc3545;
+            --border-radius: 12px;
+            --shadow: 0 4px 12px rgba(0, 0, 0, 0.1);
+            --transition: all 0.3s ease;
+        }
+
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+        }
+
+        body {
+            background: linear-gradient(135deg, #f5f7fa 0%, #e4edf5 100%);
+            color: var(--dark);
+            line-height: 1.6;
+            min-height: 100vh;
+            padding: 20px;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            justify-content: center;
+            position: relative;
+            overflow-x: hidden;
+        }
+
+        .container {
+            max-width: 500px;
+            width: 100%;
+            margin: 0 auto;
+            padding: 20px;
+        }
+
+        header {
+            text-align: center;
+            margin-bottom: 30px;
+            padding: 25px;
+            background: linear-gradient(135deg, var(--accent), var(--primary));
+            color: white;
+            border-radius: var(--border-radius);
+            box-shadow: var(--shadow);
+            position: relative;
+            overflow: hidden;
+        }
+
+        header::before {
+            content: '';
+            position: absolute;
+            top: -50%;
+            left: -50%;
+            width: 200%;
+            height: 200%;
+            background: radial-gradient(circle, rgba(255,255,255,0.1) 0%, rgba(255,255,255,0) 70%);
+            z-index: 1;
+        }
+
+        .logo-container {
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            position: relative;
+            z-index: 2;
+        }
+
+        .logo img {
+            width: 150px;
+            height: 150px;
+            background-image: url('assets/LOGO.png');
+            background-size: contain;
+            background-repeat: no-repeat;
+            background-position: center;
+            margin: 0 auto;
+            filter: drop-shadow(0px 4px 10px rgba(0,0,0,0.6));
+        }
+
+        h1 {
+            font-size: 1.8rem;
+            margin-bottom: 5px;
+            margin-top: 5px;
+            font-family: 'Montserrat', sans-serif;
+            text-align: center;
+            text-shadow: 2px 2px 5px rgba(0,0,0,0.25);
+        }
+
+        h4 {
+            opacity: 0.9;
+            font-size: 1rem;
+            font-family: 'Montserrat', sans-serif;
+            letter-spacing: 10px;
+            text-align: center;
+            margin-top: -15px;
+            text-shadow: 2px 2px 5px rgba(0,0,0,0.25);
+        }
+
+        .subtitle {
+            font-family: 'Montserrat', sans-serif;
+            font-size: 1rem;
+            opacity: 0.9;
+            position: relative;
+            margin-top: 10px;
+            z-index: 2;
+            text-shadow: 2px 2px 3px rgba(0, 0, 0, 0.2);
+        }
+
+        .form-container {
+            background: white;
+            padding: 30px;
+            border-radius: var(--border-radius);
+            box-shadow: var(--shadow);
+            margin-bottom: 30px;
+        }
+
+        .form-group {
+            margin-bottom: 20px;
+            position: relative;
+        }
+
+        label {
+            display: block;
+            margin-bottom: 8px;
+            font-weight: 600;
+            color: var(--dark);
+        }
+
+        .form-control {
+            width: 100%;
+            padding: 12px 15px;
+            border: 2px solid #e9ecef;
+            border-radius: 8px;
+            font-size: 1rem;
+            transition: var(--transition);
+            background: #f8f9fa;
+            appearance: none;
+            -webkit-appearance: none;
+            -moz-appearance: none;
+        }
+
+        .form-control:focus {
+            outline: none;
+            border-color: var(--primary);
+            background: white;
+            box-shadow: 0 0 0 3px rgba(146, 108, 21, 0.1);
+        }
+
+        .form-control:invalid {
+            border-color: var(--danger);
+        }
+
+        /* Animated placeholder styles */
+        .input-container {
+            position: relative;
+            margin-top: 10px;
+        }
+
+        .input-field {
+            width: 100%;
+            padding: 16px 15px 10px;
+            border: 2px solid #e9ecef;
+            border-radius: 8px;
+            font-size: 1rem;
+            transition: var(--transition);
+            background: #f8f9fa;
+            z-index: 1;
+            position: relative;
+        }
+
+        .input-field:focus {
+            outline: none;
+            border-color: var(--primary);
+            background: white;
+            box-shadow: 0 0 0 3px rgba(146, 108, 21, 0.1);
+        }
+
+        .input-label {
+            position: absolute;
+            top: 50%;
+            left: 15px;
+            transform: translateY(-50%);
+            color: #6c757d;
+            font-size: 1rem;
+            transition: var(--transition);
+            pointer-events: none;
+            z-index: 2;
+            background: #f8f9fa;
+            padding: 0 5px;
+        }
+
+        .input-field:focus + .input-label,
+        .input-field:not(:placeholder-shown) + .input-label {
+            top: 0;
+            left: 10px;
+            font-size: 0.8rem;
+            color: var(--primary);
+            background: white;
+            font-weight: 600;
+            transform: translateY(-50%);
+        }
+
+        .input-field:focus + .input-label {
+            color: var(--primary);
+        }
+
+        .btn {
+            width: 100%;
+            padding: 15px;
+            background: linear-gradient(135deg, var(--primary), var(--secondary));
+            color: white;
+            border: none;
+            border-radius: 8px;
+            font-size: 1.1rem;
+            font-weight: 600;
+            cursor: pointer;
+            transition: var(--transition);
+            box-shadow: var(--shadow);
+            position: relative;
+            overflow: hidden;
+        }
+
+        .btn:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 6px 15px rgba(0, 0, 0, 0.2);
+        }
+
+        .btn:active {
+            transform: translateY(0);
+        }
+
+        .btn:disabled {
+            background: #6c757d;
+            cursor: not-allowed;
+            transform: none;
+            box-shadow: none;
+        }
+
+        .loading {
+            display: inline-block;
+            width: 20px;
+            height: 20px;
+            border: 3px solid rgba(255,255,255,.3);
+            border-radius: 50%;
+            border-top-color: white;
+            animation: spin 1s ease-in-out infinite;
+        }
+
+        @keyframes spin {
+            to { transform: rotate(360deg); }
+        }
+
+        .alert {
+            padding: 15px;
+            border-radius: 8px;
+            margin-bottom: 20px;
+            text-align: center;
+            font-weight: 500;
+            animation: fadeIn 0.3s ease;
+        }
+
+        @keyframes fadeIn {
+            from { opacity: 0; transform: translateY(-10px); }
+            to { opacity: 1; transform: translateY(0); }
+        }
+
+        .alert-success {
+            background-color: #f3c65e36;
+            color: #926C15;
+            font-family: 'Montserrat', sans-serif;
+            border: 1px solid rgba(146, 108, 21, 0.2);
+        }
+
+        .alert-error {
+            background-color: #f3c65e36;
+            color: #926C15;
+            font-family: 'Montserrat', sans-serif;
+            border: 1px solid rgba(146, 108, 21, 0.2);
+        }
+
+        .alert-info {
+            background-color: #f3c65e36;
+            color: #926C15;
+            font-family: 'Montserrat', sans-serif;
+            border: 1px solid rgba(146, 108, 21, 0.2);
+        }
+
+        .alert-warning {
+            background-color: #f3c65e36;
+            color: #926C15;
+            font-family: 'Montserrat', sans-serif;
+            border: 1px solid rgba(146, 108, 21, 0.2);
+        }
+
+        footer {
+            text-align: center;
+            margin-top: 30px;
+            padding: 20px;
+            color: var(--dark);
+            opacity: 0.7;
+            font-size: 0.9rem;
+        }
+
+        .required::after {
+            content: " *";
+            color: var(--danger);
+        }
+
+        /* Name check indicator styles */
+        .name-check {
+            margin-top: 8px;
+            display: flex;
+            align-items: center;
+            opacity: 0;
+            transform: translateY(-5px);
+            transition: var(--transition);
+            font-family: 'Montserrat', sans-serif;
+            font-size: 0.9rem;
+        }
+
+        .name-check.show {
+            opacity: 1;
+            transform: translateY(0);
+        }
+
+        .name-check.available {
+            color: var(--success);
+        }
+
+        .name-check.duplicate {
+            color: #d35400;
+        }
+
+        .name-check.error {
+            color: var(--danger);
+        }
+
+        .name-check i {
+            margin-right: 8px;
+        }
+
+        /* Custom select styling */
+        .select-container {
+            position: relative;
+        }
+
+        .select-container::after {
+            content: '\f078';
+            font-family: 'Font Awesome 6 Free';
+            font-weight: 900;
+            position: absolute;
+            right: 15px;
+            top: 50%;
+            transform: translateY(-50%);
+            color: var(--primary);
+            pointer-events: none;
+        }
+
+        /* Snow Animation in Header */
+        .snow-container {
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            pointer-events: none;
+            z-index: 0;
+        }
+
+        .snowflake {
+            position: absolute;
+            top: -10px;
+            color: #fff;
+            font-size: 1em;
+            opacity: 0.8;
+            animation: snowfall linear infinite;
+        }
+
+        @keyframes snowfall {
+            0% {
+                transform: translateY(0) rotate(0deg);
+            }
+            100% {
+                transform: translateY(100px) rotate(360deg);
+            }
+        }
+
+        /* Home Button */
+        .home-btn {
+            display: inline-block;
+            margin-bottom: 20px;
+            padding: 10px 20px;
+            background: linear-gradient(135deg, var(--primary), var(--secondary));
+            color: white;
+            text-decoration: none;
+            border-radius: 8px;
+            font-weight: 600;
+            transition: var(--transition);
+            box-shadow: var(--shadow);
+            position: relative;
+            overflow: hidden;
+        }
+
+        .home-btn:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 6px 15px rgba(0, 0, 0, 0.2);
+        }
+
+        .home-btn i {
+            margin-right: 8px;
+        }
+
+        /* Responsive improvements */
+        @media (max-width: 768px) {
+            body {
+                padding: 10px;
+            }
+            
+            .container {
+                padding: 10px;
+            }
+            
+            header {
+                padding: 20px;
+            }
+            
+            h1 {
+                font-size: 1.3rem;
+            }
+            
+            .subtitle {
+                font-size: 0.9rem;
+            }
+            
+            .form-container {
+                padding: 20px;
+            }
+            
+            .logo img {
+                width: 120px;
+                height: 120px;
+            }
+            
+            .alert {
+                font-size: 0.9rem;
+                padding: 12px;
+            }
+            
+            .name-check {
+                font-size: 0.8rem;
+            }
+        }
+
+        @media (max-width: 480px) {
+            h1 {
+                font-size: 1.5rem;
+            }
+            
+            .subtitle {
+                font-size: 0.8rem;
+            }
+            
+            .form-container {
+                padding: 15px;
+            }
+            
+            .btn {
+                padding: 12px;
+                font-size: 1rem;
+            }
+            
+            .input-field {
+                padding: 14px 15px 8px;
+            }
+        }
+
+        /* Performance optimizations */
+        .performance-optimized {
+            will-change: transform, opacity;
+            transform: translateZ(0);
+        }
+
+        /* Focus styles for accessibility */
+        .btn:focus-visible,
+        .input-field:focus-visible,
+        .form-control:focus-visible {
+            outline: 2px solid var(--primary);
+            outline-offset: 2px;
+        }
+
+        /* High contrast mode support */
+        @media (prefers-contrast: high) {
+            :root {
+                --primary: #000000;
+                --secondary: #333333;
+                --accent: #666666;
+            }
+            
+            .btn {
+                border: 2px solid var(--dark);
+            }
+        }
+
+        /* Reduced motion support */
+        @media (prefers-reduced-motion: reduce) {
+            * {
+                animation-duration: 0.01ms !important;
+                animation-iteration-count: 1 !important;
+                transition-duration: 0.01ms !important;
+            }
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <!-- Home Button -->
+        <a href="index.html" class="home-btn">
+            <i class="fas fa-home"></i> Home
+        </a>
+
+        <header>
+            <!-- Snow Animation in Header -->
+            <div class="snow-container" id="snowContainer"></div>
+            
+            <div class="logo-container">
+                <div class="logo">
+                    <img src="assets/LOGO.png" alt="Church Logo" loading="eager">
+                </div>
+            </div>
+            <h1>JOYFUL SOUND CHURCH</h1>
+            <h4>INTERNATIONAL</h4>
+            <p class="subtitle">CHURCH ANNIVERSARY REGISTRATION</p>
+        </header>
+
+        <div id="alertContainer"></div>
+
+        <div class="form-container">
+            <form id="registrationForm">
+                <div class="form-group">
+                    <div class="input-container">
+                        <input type="text" id="name" class="input-field" placeholder=" " required>
+                        <label for="name" class="input-label">Full Name</label>
+                    </div>
+                    <div id="nameCheck" class="name-check">
+                        <i class="fas fa-info-circle"></i>
+                        <span id="nameCheckText"></span>
+                    </div>
+                </div>
+
+                <div class="form-group">
+                    <div class="select-container">
+                        <select id="department" class="form-control" required>
+                            <option value="">Select Department</option>
+                            <option value="JSCI - Kids">JSCI - Kids</option>
+                            <option value="JSCI - Youth">JSCI - Youth</option>
+                            <option value="JSCI - Young Adult">JSCI - Young Adult</option>
+                            <option value="JSCI - Womens">JSCI - Womens</option>
+                            <option value="JSCI - Mens">JSCI - Mens</option>
+                            <option value="Guest">Guest</option>
+                        </select>
+                    </div>
+                </div>
+
+                <button type="submit" class="btn" id="submitBtn">
+                    <span id="btnText">Register Now</span>
+                    <span id="btnLoading" style="display: none;">
+                        <span class="loading"></span> Processing...
+                    </span>
+                </button>
+            </form>
+        </div>
+
+        <footer>
+            <p>Joyful Sound Church - International &copy; <span id="currentYear"></span></p>
+        </footer>
+    </div>
+
+    <script>
+    // Set current year in footer
+    document.getElementById('currentYear').textContent = new Date().getFullYear();
+
+    // Google Apps Script URL for registration
+    const REGISTRATION_SCRIPT_URL = 'https://script.google.com/macros/s/AKfycbzSJKs1Ipw1VAjbwtYVn9HRZkTJgVN2dzwxhMhyRA759o_pY_FFbKUdo76gdfTcq0ojpg/exec';
+
+    // Cache for name checks
+    const nameCheckCache = new Map();
+    const CACHE_DURATION = 5 * 60 * 1000; // 5 minutes
+
+    // Store for generated registration IDs to ensure uniqueness
+    const generatedRegistrationIds = new Set();
+
+    // Function to generate a unique 8-digit Registration ID
+    function generateRegistrationID() {
+        let registrationId;
+        let attempts = 0;
+        const maxAttempts = 100; // Prevent infinite loop
+        
+        do {
+            // Generate 8 random digits
+            registrationId = Math.floor(10000000 + Math.random() * 90000000).toString();
+            attempts++;
+            
+            // If we've tried too many times, add a timestamp to ensure uniqueness
+            if (attempts >= maxAttempts) {
+                const timestamp = Date.now().toString().slice(-4);
+                registrationId = registrationId.slice(0, 4) + timestamp;
+                break;
+            }
+        } while (generatedRegistrationIds.has(registrationId));
+        
+        // Add to our set to ensure uniqueness in this session
+        generatedRegistrationIds.add(registrationId);
+        
+        return registrationId;
+    }
+
+    // Show alert message
+    function showAlert(message, type = 'info') {
+        const alertContainer = document.getElementById('alertContainer');
+        alertContainer.innerHTML = '';
+        
+        const alert = document.createElement('div');
+        alert.className = `alert alert-${type} performance-optimized`;
+        alert.innerHTML = message;
+        alertContainer.appendChild(alert);
+        
+        const timeout = type === 'success' ? 5000 : 10000;
+        setTimeout(() => {
+            if (alert.parentNode) {
+                alert.remove();
+            }
+        }, timeout);
+    }
+
+    // Name duplication check function
+    function checkNameAvailability(name) {
+        const nameCheck = document.getElementById('nameCheck');
+        const nameCheckText = document.getElementById('nameCheckText');
+        
+        // Reset the indicator
+        nameCheck.classList.remove('show', 'available', 'duplicate', 'error');
+        
+        if (!name || name.length < 2) {
+            return;
+        }
+        
+        // Check cache first
+        const cachedResult = nameCheckCache.get(name.toLowerCase());
+        if (cachedResult && (Date.now() - cachedResult.timestamp) < CACHE_DURATION) {
+            updateNameCheckUI(cachedResult.exists, name);
+            return;
+        }
+        
+        // Show loading state
+        nameCheck.classList.add('show');
+        nameCheckText.textContent = 'Checking name availability...';
+        
+        // Use JSONP to check if name exists in the spreadsheet
+        checkNameWithJSONP(name)
+            .then(response => {
+                if (response.status === 'success') {
+                    // Cache the result
+                    nameCheckCache.set(name.toLowerCase(), {
+                        exists: response.exists,
+                        timestamp: Date.now()
+                    });
+                    
+                    updateNameCheckUI(response.exists, name);
+                } else {
+                    throw new Error(response.message);
+                }
+            })
+            .catch(error => {
+                console.error('Name check error:', error);
+                nameCheck.classList.add('error');
+                nameCheckText.textContent = 'Error checking name availability. Please try again.';
+            });
+    }
+
+    // Update name check UI
+    function updateNameCheckUI(exists, name) {
+        const nameCheck = document.getElementById('nameCheck');
+        const nameCheckText = document.getElementById('nameCheckText');
+        
+        if (exists) {
+            nameCheck.classList.add('duplicate');
+            nameCheckText.innerHTML = `<strong>"${name}"</strong> is already registered. Please check if this is you or use a different name.`;
+        } else {
+            nameCheck.classList.add('available');
+            nameCheckText.textContent = 'Name is available for registration.';
+        }
+    }
+
+    // JSONP method to check name availability
+    function checkNameWithJSONP(name) {
+        return new Promise((resolve, reject) => {
+            // Create a unique callback name
+            const callbackName = 'name_check_callback_' + Math.round(100000 * Math.random());
+            
+            // Create script tag
+            const script = document.createElement('script');
+            const params = new URLSearchParams({
+                action: 'checkName',
+                name: name,
+                callback: callbackName
+            });
+            
+            script.src = `${REGISTRATION_SCRIPT_URL}?${params.toString()}`;
+            
+            // Define the callback function
+            window[callbackName] = function(response) {
+                // Clean up
+                delete window[callbackName];
+                document.body.removeChild(script);
+                resolve(response);
+            };
+            
+            // Add error handling
+            script.onerror = function() {
+                delete window[callbackName];
+                document.body.removeChild(script);
+                reject(new Error('Network error during name check'));
+            };
+            
+            // Execute the request
+            document.body.appendChild(script);
+        });
+    }
+
+    // Handle form submission using JSONP technique
+    document.getElementById('registrationForm').addEventListener('submit', async function(e) {
+        e.preventDefault();
+        
+        const submitBtn = document.getElementById('submitBtn');
+        const btnText = document.getElementById('btnText');
+        const btnLoading = document.getElementById('btnLoading');
+        const nameInput = document.getElementById('name');
+        const departmentSelect = document.getElementById('department');
+        const nameCheck = document.getElementById('nameCheck');
+        
+        // Get form values
+        const name = nameInput.value.trim();
+        const department = departmentSelect.value;
+        
+        // Basic validation
+        if (!name) {
+            showAlert('Please enter your name', 'error');
+            nameInput.focus();
+            return;
+        }
+        
+        if (!department) {
+            showAlert('Please select a department', 'error');
+            departmentSelect.focus();
+            return;
+        }
+        
+        // Check if name is already registered (case-insensitive)
+        try {
+            const nameCheckResult = await checkNameWithJSONP(name);
+            if (nameCheckResult.exists) {
+                showAlert('This name is already registered. Please use a different name or check if you have already registered.', 'error');
+                nameCheck.classList.add('duplicate');
+                nameCheckText.innerHTML = `<strong>"${name}"</strong> is already registered. Please check if this is you or use a different name.`;
+                return;
+            }
+        } catch (error) {
+            console.error('Name check error:', error);
+            // Continue with registration even if name check fails
+        }
+        
+        // Generate Registration ID
+        const registrationId = generateRegistrationID();
+        
+        // Show loading state
+        submitBtn.disabled = true;
+        btnText.style.display = 'none';
+        btnLoading.style.display = 'inline';
+        
+        try {
+            // Use JSONP technique to bypass CORS
+            await submitWithJSONP(name, department, registrationId);
+            
+        } catch (error) {
+            console.error('Registration error:', error);
+            showAlert('Registration failed: ' + error.message, 'error');
+        } finally {
+            // Reset button state
+            submitBtn.disabled = false;
+            btnText.style.display = 'inline';
+            btnLoading.style.display = 'none';
+        }
+    });
+
+    // JSONP submission method (bypasses CORS)
+    function submitWithJSONP(name, department, registrationId) {
+        return new Promise((resolve, reject) => {
+            // Create a unique callback name
+            const callbackName = 'jsonp_callback_' + Math.round(100000 * Math.random());
+            
+            // Create script tag
+            const script = document.createElement('script');
+            const params = new URLSearchParams({
+                name: name,
+                department: department,
+                registrationId: registrationId,
+                callback: callbackName
+            });
+            
+            script.src = `${REGISTRATION_SCRIPT_URL}?${params.toString()}`;
+            
+            // Define the callback function
+            window[callbackName] = function(response) {
+                // Clean up
+                delete window[callbackName];
+                document.body.removeChild(script);
+                
+                if (response.status === 'success') {
+                    showAlert('Registration successful! Thank you for registering.', 'success');
+                    document.getElementById('registrationForm').reset();
+                    document.getElementById('nameCheck').classList.remove('show');
+                    // Clear cache for this name
+                    nameCheckCache.delete(name.toLowerCase());
+                    resolve(response);
+                } else {
+                    reject(new Error(response.message));
+                }
+            };
+            
+            // Add error handling
+            script.onerror = function() {
+                delete window[callbackName];
+                document.body.removeChild(script);
+                reject(new Error('Network error'));
+            };
+            
+            // Execute the request
+            document.body.appendChild(script);
+        });
+    }
+
+    // Add input validation and name check
+    document.getElementById('name').addEventListener('input', function(e) {
+        const value = e.target.value.trim();
+        
+        // Input validation
+        if (value && !/^[a-zA-Z\s.'-]+$/.test(value)) {
+            e.target.style.borderColor = 'var(--danger)';
+        } else {
+            e.target.style.borderColor = '';
+        }
+        
+        // Check name availability after a short delay
+        clearTimeout(window.nameCheckTimeout);
+        window.nameCheckTimeout = setTimeout(() => {
+            checkNameAvailability(value);
+        }, 500);
+    });
+
+    // Snow Animation in Header
+    function createSnow() {
+        const snowContainer = document.getElementById('snowContainer');
+        const snowflakes = ['❄', '❅', '❆'];
+        
+        for (let i = 0; i < 30; i++) {
+            const snowflake = document.createElement('div');
+            snowflake.className = 'snowflake';
+            snowflake.textContent = snowflakes[Math.floor(Math.random() * snowflakes.length)];
+            snowflake.style.left = Math.random() * 100 + '%';
+            snowflake.style.animationDuration = Math.random() * 3 + 2 + 's';
+            snowflake.style.animationDelay = Math.random() * 5 + 's';
+            snowflake.style.fontSize = (Math.random() * 10 + 10) + 'px';
+            snowflake.style.opacity = Math.random() * 0.5 + 0.3;
+            snowContainer.appendChild(snowflake);
+        }
+    }
+
+    // Test the connection when page loads
+    window.addEventListener('load', function() {
+        console.log('Registration system loaded');
+        showAlert('Registration form is ready!', 'success');
+        
+        // Create snow animation in header
+        createSnow();
+    });
+
+    // Manual test function
+    window.testRegistration = function() {
+        const testData = {
+            name: "Test User",
+            department: "JSCI - Youth"
+        };
+        
+        console.log('Testing registration...');
+        submitWithJSONP(testData.name, testData.department, generateRegistrationID())
+            .then(result => console.log('Test successful:', result))
+            .catch(error => console.error('Test failed:', error));
+    };
+
+    // Preload critical resources
+    function preloadCriticalResources() {
+        // Preload the logo
+        const logo = new Image();
+        logo.src = 'assets/LOGO.png';
+    }
+
+    // Initialize the form
+    function init() {
+        preloadCriticalResources();
+        console.log('Registration form initialized');
+    }
+
+    // Initialize when DOM is ready
+    if (document.readyState === 'loading') {
+        document.addEventListener('DOMContentLoaded', init);
+    } else {
+        init();
+    }
+    </script>
+</body>
+</html>

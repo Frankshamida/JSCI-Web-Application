@@ -1,0 +1,249 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Joyful Sound Church - International</title>
+    <link rel="icon" type="image/x-icon" href="assets/LOGO.png">
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            background: linear-gradient(135deg, #f5f7fa 0%, #e4edf5 100%);
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+            min-height: 100vh;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            overflow: hidden;
+        }
+
+        .splash-container {
+            text-align: center;
+            animation: fadeIn 1.5s ease-in-out;
+        }
+
+        .logo {
+            width: 200px;
+            height: 200px;
+            margin: 0 auto 30px;
+            padding: 20px;
+            animation: pulse 2s infinite, float 3s ease-in-out infinite;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+        }
+
+        .logo img {
+            width: 170%;
+            height: 170%;
+            object-fit: contain;
+        }
+
+        .church-name {
+            font-family: 'Montserrat', sans-serif;
+            font-size: 2.5rem;
+            font-weight: 700;
+            color: #926C15;
+            margin-bottom: 10px;
+            text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.1);
+            animation: slideUp 1s ease-out 0.5s both;
+        }
+
+        .church-subtitle {
+            font-family: 'Montserrat', sans-serif;
+            font-size: 1.2rem;
+            color: #C9980B;
+            letter-spacing: 8px;
+            margin-bottom: 40px;
+            text-transform: uppercase;
+            animation: slideUp 1s ease-out 0.8s both;
+        }
+
+        .loading-bar {
+            width: 200px;
+            height: 4px;
+            background: rgba(146, 108, 21, 0.2);
+            border-radius: 2px;
+            margin: 0 auto;
+            overflow: hidden;
+            animation: slideUp 1s ease-out 1.1s both;
+        }
+
+        .loading-progress {
+            width: 0%;
+            height: 100%;
+            background: linear-gradient(90deg, #FFC300, #926C15);
+            border-radius: 2px;
+            animation: loading 3s ease-in-out 1.1s forwards;
+        }
+
+        .loading-text {
+            margin-top: 20px;
+            color: #666;
+            font-size: 0.9rem;
+            animation: slideUp 1s ease-out 1.4s both;
+        }
+
+        /* Snow Animation */
+        .snow-container {
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            pointer-events: none;
+            z-index: -1;
+        }
+
+        .snowflake {
+            position: absolute;
+            top: -10px;
+            color: #926C15;
+            font-size: 1em;
+            opacity: 0.6;
+            animation: snowfall linear infinite;
+        }
+
+        /* Animations */
+        @keyframes fadeIn {
+            from { opacity: 0; }
+            to { opacity: 1; }
+        }
+
+        @keyframes pulse {
+            0%, 100% { transform: scale(1); }
+            50% { transform: scale(1.05); }
+        }
+
+        @keyframes float {
+            0%, 100% { transform: translateY(0px); }
+            50% { transform: translateY(-10px); }
+        }
+
+        @keyframes slideUp {
+            from { 
+                opacity: 0;
+                transform: translateY(30px);
+            }
+            to { 
+                opacity: 1;
+                transform: translateY(0);
+            }
+        }
+
+        @keyframes loading {
+            0% { width: 0%; }
+            50% { width: 70%; }
+            100% { width: 100%; }
+        }
+
+        @keyframes snowfall {
+            0% {
+                transform: translateY(0) rotate(0deg);
+            }
+            100% {
+                transform: translateY(100vh) rotate(360deg);
+            }
+        }
+
+        /* Mobile Responsive */
+        @media (max-width: 768px) {
+            .logo {
+                width: 200px;
+                height: 200px;
+            }
+
+            .church-name {
+                font-size: 2rem;
+            }
+
+            .church-subtitle {
+                font-size: 1rem;
+                letter-spacing: 5px;
+            }
+        }
+
+        @media (max-width: 480px) {
+            .logo {
+                width: 120px;
+                height: 120px;
+            }
+
+            .church-name {
+                font-size: 1.5rem;
+            }
+
+            .church-subtitle {
+                font-size: 0.8rem;
+                letter-spacing: 3px;
+            }
+        }
+    </style>
+</head>
+<body>
+    <!-- Snow Animation -->
+    <div class="snow-container" id="snowContainer"></div>
+
+    <!-- Splash Screen Content -->
+    <div class="splash-container">
+        <div class="logo">
+            <img src="assets/LOGO.png" alt="Joyful Sound Church Logo">
+        </div>
+        
+        <h1 class="church-name">JOYFUL SOUND CHURCH</h1>
+        <p class="church-subtitle">INTERNATIONAL</p>
+        
+        <div class="loading-bar">
+            <div class="loading-progress"></div>
+        </div>
+        
+        <p class="loading-text">Loading God's blessings...</p>
+    </div>
+
+    <script>
+        // Create snow animation
+        function createSnow() {
+            const snowContainer = document.getElementById('snowContainer');
+            const snowflakes = ['❄', '❅', '❆'];
+            
+            for (let i = 0; i < 25; i++) {
+                const snowflake = document.createElement('div');
+                snowflake.className = 'snowflake';
+                snowflake.textContent = snowflakes[Math.floor(Math.random() * snowflakes.length)];
+                snowflake.style.left = Math.random() * 100 + '%';
+                snowflake.style.animationDuration = Math.random() * 4 + 3 + 's';
+                snowflake.style.animationDelay = Math.random() * 5 + 's';
+                snowflake.style.fontSize = (Math.random() * 12 + 8) + 'px';
+                snowflake.style.opacity = Math.random() * 0.4 + 0.2;
+                snowContainer.appendChild(snowflake);
+            }
+        }
+
+        // Redirect to main app after splash screen
+        function redirectToApp() {
+            // Change this to your main app page (e.g., 'main.html', 'home.html', etc.)
+            window.location.href = 'index.html';
+        }
+
+        // Initialize when page loads
+        window.addEventListener('load', function() {
+            createSnow();
+            
+            // Redirect after 4 seconds (adjust timing as needed)
+            setTimeout(redirectToApp, 4000);
+            
+            // Also redirect on click/tap for user convenience
+            document.addEventListener('click', redirectToApp);
+            document.addEventListener('touchstart', redirectToApp);
+        });
+
+        // Fallback: redirect if something goes wrong
+        setTimeout(redirectToApp, 8000);
+    </script>
+</body>
+</html>
