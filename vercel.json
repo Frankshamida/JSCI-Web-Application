@@ -10,7 +10,7 @@
   "routes": [
     {
       "src": "/",
-      "dest": "/enrty-point.html"
+      "dest": "/entry-point.html"
     },
     {
       "src": "/(.*)",
