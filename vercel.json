@@ -5,6 +5,10 @@
     {
       "src": "**/*.html",
       "use": "@vercel/static"
+    },
+    {
+      "src": "assets/**/*",
+      "use": "@vercel/static"
     }
   ],
   "routes": [
@@ -13,10 +17,26 @@
       "dest": "/entry-point.html"
     },
     {
-      "src": "/(.*)",
+      "src": "/index",
+      "dest": "/index.html"
+    },
+    {
+      "src": "/Points_Giver",
+      "dest": "/Points_Giver.html"
+    },
+    {
+      "src": "/Registration",
+      "dest": "/Registration.html"
+    },
+    {
+      "src": "/(.*\\.(html|css|js|png|jpg|jpeg|gif|ico|svg))",
       "dest": "/$1"
+    },
+    {
+      "src": "/(.*)",
+      "dest": "/entry-point.html"
     }
   ],
-  "cleanUrls": true,
+  "cleanUrls": false,
   "trailingSlash": false
 }
